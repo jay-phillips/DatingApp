@@ -33,6 +33,7 @@ namespace DatingApp.API
             services.AddDbContext<DataContext>(x => x.UseSqlite
             (Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddCors();
             services.AddScoped<IAuthRepository, AuthRepository>();
              services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -41,7 +42,7 @@ namespace DatingApp.API
                     {
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII
-                            .GetBytes(Configuration.GetSection("AppSettings: Token").Value)),
+                            .GetBytes(Configuration.GetSection("AppSettings:Token").Value)),
                         ValidateIssuer = false,
                         ValidateAudience = false
                     };
