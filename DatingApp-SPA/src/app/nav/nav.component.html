@@ -5,22 +5,23 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      
-        <ul *ngIf="loggedIn()" class="navbar-nav mr-auto">
-          <li class="nav-item" routerLinkActive="active">
-            <a class="nav-link" [routerLink]="['/members']" >Matches <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/lists']">Lists</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/messages']">Messages</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" (click)="logout()">Logout</a>
-          </li>
-         
-        </ul>
+        
+          <ul *ngIf="loggedIn()" class="navbar-nav mr-auto inline">
+            <li class="nav-item" routerLinkActive="active">
+              <a class="nav-link" [routerLink]="['/members']" >Matches <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/lists']">Lists</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" [routerLink]="['/messages']">Messages</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" (click)="logout()">Logout</a>
+            </li>
+          
+          </ul>
+     
 
           <div *ngIf="loggedIn()" class="dropdown" dropdown>
             <a class="dropdown-toggle text-light" dropdownToggle>
@@ -28,7 +29,7 @@
             </a>
 
             <div class="dropdown-menu mt-3" *dropdownMenu>
-              <a class="dropdown-item" href="#">Edit Profile</a>
+              <a class="dropdown-item" [routerLink]="['member/edit']">Edit Profile</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" (click)="logout()">
               <i class="fa fa-sign-out"></i> Logout</a>
