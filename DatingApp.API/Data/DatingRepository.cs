@@ -45,7 +45,7 @@ namespace DatingApp.API.Data
         public async Task<PagedList<User>> GetUsers(UserParams userParams)
         {
             var users = _context.Users.Include(p => p.Photos)
-            .OderByDescending(u => u.LastActive).AsQueryable();
+            .OrderByDescending(u => u.LastActive).AsQueryable();
 
             users = users.Where( u => u.Id != userParams.UserId);
 
@@ -65,11 +65,11 @@ namespace DatingApp.API.Data
                 switch (userParams.OrderBy)
                 {
                     case "created":
-                     users = users.OderByDescending(u => u.Created);
+                     users = users.OrderByDescending(u => u.Created);
                      break;
                     default:  
-                     users = users.OderByDescending(u => u.LastActive);
-                     breaks;
+                     users = users.OrderByDescending(u => u.LastActive);
+                     break;
 
 
                 }
