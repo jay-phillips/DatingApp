@@ -14,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
 export class ListsComponent implements OnInit {
   users: User[];
   pagination: Pagination;
-  likesParam: string
+  likesParam: string;
 
   constructor(private authService: AuthService, private userService: UserService, 
     private route: ActivatedRoute, private alertify: AlertifyService)
@@ -40,7 +40,7 @@ export class ListsComponent implements OnInit {
 
   loadUsers() {
     this.userService
-    .getUsers(this.pagination.currentPage, this.pagination.itemsPerPage, this.likesParam)
+    .getUsers(this.pagination.currentPage, this.pagination.itemsPerPage,null, this.likesParam)
     .subscribe(
       (res: PaginatedResult<User[]>) => {
       this.users = res.result;
