@@ -37,6 +37,9 @@ import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './members/photo-editor/photo-editor.component';
 import { TimeagoModule } from 'ngx-timeago';
 import { ListsResolver } from './_resolvers/list.resolver';
+import { MessagesResolver } from './_resolvers/messages.resolver'; 
+import { MemberMessagesComponent } from './members/member-messages/member-messages.component';
+
 
 
 
@@ -57,6 +60,7 @@ export function tokenGetter(){
       MemberDetailComponent,
       MemberEditComponent,
       PhotoEditorComponent,
+      MemberMessagesComponent
      
    ],
    imports: [
@@ -78,7 +82,7 @@ export function tokenGetter(){
          config: {
             tokenGetter: tokenGetter,
             allowedDomains: ['localhost:5000'],
-            disallowedRoutes: ['localhost:5000/api/auth']
+            disallowedRoutes: ['localhost:5000/api/auth/register']
          }
 
       })
@@ -93,7 +97,8 @@ export function tokenGetter(){
       MemberListResolver,
       MemberEditResolver,
       PreventUnsavedChanges,
-      ListsResolver
+      ListsResolver,
+      MessagesResolver
 
    ],
    bootstrap: [
