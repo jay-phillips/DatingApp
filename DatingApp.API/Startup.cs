@@ -31,11 +31,28 @@ namespace DatingApp.API
         }
         public IConfiguration Configuration { get; }
 
+        public void ConfigureDeveloptmentServices(IServiceCollection services)
+        { 
+             services.AddDbContext<DataContext>(x => x.UseSqlite
+            (Configuration.GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+
+        }
+
+         public void ConfigureProductionServices(IServiceCollection services)
+        { 
+             services.AddDbContext<DataContext>(x => x.UseMySql
+            (Configuration.GetConnectionString("DefaultConnection")));
+
+            ConfigureServices(services);
+
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(x => x.UseSqlite
-            (Configuration.GetConnectionString("DefaultConnection")));
+           
             
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
             services.AddControllers().AddNewtonsoftJson(
@@ -94,11 +111,40 @@ namespace DatingApp.API
 
             //app.UseHttpsRedirection();
             app.UseRouting();
+            
+           
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
-            app.UseAuthentication();
-            app.UseMvc();
+            
 
-            // app.UseAuthorization();
+            app.UseAuthentication();
+            app.UseAuthorization();
+        
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+         
+            app.UseEndpoints(endpoints => 
+            {
+
+                endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
+            });
+              
+            
+           app.UseRouting();
+ 
+            app.UseAuthentication();
+            app.UseAuthorization();
+ 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+ 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+ 
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+                endpoints.MapFallbackToController("Index", "Fallback");
+            });
 
 
         }
